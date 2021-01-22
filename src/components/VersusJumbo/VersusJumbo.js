@@ -3,7 +3,7 @@ const VersusJumbo = (props) => {
     return (
         <div>
             <p>
-                <span>{props.homeTeam}</span> VS. <span>{props.awayTeam}</span>
+                <h2>{props.homeTeam}</h2> VS. <h2>{props.awayTeam}</h2>
             </p>
         </div>
     )
