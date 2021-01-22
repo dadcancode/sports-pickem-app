@@ -9,7 +9,7 @@ function App() {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/leauge/index')
+    fetch('http://localhost:3000/league/index')
       .then(resp => resp.json())
       .then(json => {
         console.log(json)
