@@ -45,7 +45,7 @@ function App() {
             <VersusJumbo homeTeam={opponents[0]} awayTeam={opponents[1]} />
             <PickCard pickQuestion='Who will win?' choiceA={opponents[0]} choiceB={opponents[1]}/>
             <PickCard pickQuestion='Most Passing Yards?' choiceA={opponents[0]} choiceB={opponents[1]}/>
-            <PickCard pickQuestion='Most Rushing Yards' choiceA={opponents[0]} choiceB={opponents[1]}/>
+            <PickCard pickQuestion='Most Rushing Yards?' choiceA={opponents[0]} choiceB={opponents[1]}/>
             <PickCard pickQuestion='Most Sacks?' choiceA={opponents[0]} choiceB={opponents[1]}/>
           </>
       }
