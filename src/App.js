@@ -6,6 +6,7 @@ import { getTwoDiff } from "./components/services";
 import VersusJumbo from "./components/VersusJumbo/VersusJumbo";
 import './App.css';
 import SubmitPicks from "./components/SubmitPicks/SubmitPicks";
+import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
 
 
 function App() {
@@ -14,32 +15,14 @@ function App() {
   const [opponents, setOpponents] = useState();
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetch('http://localhost:3000/league/index')
-      .then(resp => resp.json())
-      .then(json => {
-        setTeams(json);
-      })
-  }, [])
-
-  useEffect(() => {
-    if(teams) {
-      let matchup = getTwoDiff(teams);
-      setOpponents(matchup);
-    }
-  }, [teams])
-
-  useEffect(() => {
-    if(opponents) {
-      setLoading(false);
-    }
-  }, [opponents])
+  
 
 
   return (
     <div className="App">
       <Banner />
-      {
+      <ChooseSeason />
+      {/* {
         loading ? 
           <LoadScreen /> : 
           <>
@@ -50,7 +33,7 @@ function App() {
             <PickCard pickQuestion='Most Sacks?' choiceA={opponents[0]} choiceB={opponents[1]}/>
             <SubmitPicks />
           </>
-      }
+      } */}
       
     </div>
   );
