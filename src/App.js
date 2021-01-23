@@ -17,10 +17,10 @@ function App() {
   const [randomPicks, setRandomPicks] = useState();
 
   const [results, setResults] = useState({
-    pick0: '',
-    pick1: '',
-    pick2: '',
-    pick3: ''
+    pick0: null,
+    pick1: null,
+    pick2: null,
+    pick3: null
   })
   
   const routes = {

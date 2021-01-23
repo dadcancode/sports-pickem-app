@@ -10,7 +10,6 @@ const PickCard = (props) => {
         setSelected(answer);
         let clone = props.results;
         clone[`pick${ind}`] = answer;
-        console.log(clone)
         props.setResults({...props.results, ...clone});
     }
 
@@ -23,11 +22,11 @@ const PickCard = (props) => {
     }
 
     return (
-        <div className = 'card pick-card'>
+        <div className = 'card pick-card pt-1 col-12 mb-2'>
             <div className='card-title container-fluid'>
                 <div className='row'>
                     <p className='col-10'>{props.pickQuestion}</p>
-                    <p className='col-2 pick-card-date bg-dark text-light'>{convertDate(props.date)}</p>
+                    <p className='col-2 pick-card-date bg-dark text-light d-flex justify-content-center align-items-center'>{convertDate(props.date)}</p>
                 </div>
             </div>
             <div className = 'card-body container-fluid'>
