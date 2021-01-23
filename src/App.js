@@ -5,6 +5,7 @@ import PickCard from "./components/PickCard/PickCard";
 import { getTwoDiff } from "./components/services";
 import VersusJumbo from "./components/VersusJumbo/VersusJumbo";
 import './App.css';
+import SubmitPicks from "./components/SubmitPicks/SubmitPicks";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <PickCard pickQuestion='Most Passing Yards?' choiceA={opponents[0]} choiceB={opponents[1]}/>
             <PickCard pickQuestion='Most Rushing Yards?' choiceA={opponents[0]} choiceB={opponents[1]}/>
             <PickCard pickQuestion='Most Sacks?' choiceA={opponents[0]} choiceB={opponents[1]}/>
+            <SubmitPicks />
           </>
       }
       
