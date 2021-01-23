@@ -1,39 +1,43 @@
 import { useEffect, useState } from "react";
 import Banner from "./components/Banner/Banner";
 import LoadScreen from "./components/LoadScreen/LoadScreen";
-import PickCard from "./components/PickCard/PickCard";
-import { getTwoDiff } from "./components/services";
-import VersusJumbo from "./components/VersusJumbo/VersusJumbo";
-import './App.css';
-import SubmitPicks from "./components/SubmitPicks/SubmitPicks";
 import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
-
+import { useRoutes } from 'hookrouter';
+import { GET_SEASONS } from './graphql';
+import { useQuery } from '@apollo/react-hooks'
+import Game from './components/Game/Game';
+import './App.css';
 
 function App() {
 
-  const [teams, setTeams] = useState();
-  const [opponents, setOpponents] = useState();
-  const [loading, setLoading] = useState(true)
+  const { loading, error, data } = useQuery(GET_SEASONS);
+  const [seasons, setSeasons] = useState();
+  const [chosenSeason, setChosenSeason] = useState();
+  const [events, setEvents] = useState();
+  const [randomPicks, setRandomPicks] = useState();
+  
+  const routes = {
+    '/': () => <ChooseSeason seasons={seasons} setChosenSeason={setChosenSeason}/>,
+    '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks}/>
+  }
+  
+  const routeResult = useRoutes(routes);
 
   
 
+  useEffect(() => {
+      if(data) {
+          setSeasons(data.baseseasons);
+      }
+  }, [data]);
 
   return (
     <div className="App">
       <Banner />
-      <ChooseSeason />
-      {/* {
+      {
         loading ? 
-          <LoadScreen /> : 
-          <>
-            <VersusJumbo homeTeam={opponents[0]} awayTeam={opponents[1]} />
-            <PickCard pickQuestion='Who will win?' choiceA={opponents[0]} choiceB={opponents[1]}/>
-            <PickCard pickQuestion='Most Passing Yards?' choiceA={opponents[0]} choiceB={opponents[1]}/>
-            <PickCard pickQuestion='Most Rushing Yards?' choiceA={opponents[0]} choiceB={opponents[1]}/>
-            <PickCard pickQuestion='Most Sacks?' choiceA={opponents[0]} choiceB={opponents[1]}/>
-            <SubmitPicks />
-          </>
-      } */}
+          <LoadScreen /> : routeResult
+      }
       
     </div>
   );

@@ -7,3 +7,18 @@ export const GET_SEASONS = gql `
         }
     }
 `;
+
+export const GET_SEASON = gql `
+    query Season($year: String!){
+        season(year: $year) {
+            events {
+                strEvent
+                strHomeTeam
+                strAwayTeam
+                intHomeScore
+                intAwayScore
+                dateEvent
+            }
+        }
+    }
+`;

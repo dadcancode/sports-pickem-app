@@ -7,8 +7,10 @@ const PickCard = (props) => {
                 {props.pickQuestion}
             </h5>
             <div className = 'card-body'>
-                <div className='btn btn-outline-info'>{props.choiceA}</div>
-                <div className='btn btn-outline-info'>{props.choiceB}</div>
+                <div className='d-flex justify-content-around'>
+                    <div className='btn btn-outline-info w-50'>{props.choiceA}</div>
+                    <div className='btn btn-outline-info w-50'>{props.choiceB}</div>
+                </div>
             </div>
         </div>
     )
