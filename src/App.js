@@ -15,10 +15,17 @@ function App() {
   const [chosenSeason, setChosenSeason] = useState();
   const [events, setEvents] = useState();
   const [randomPicks, setRandomPicks] = useState();
+
+  const [results, setResults] = useState({
+    pick0: '',
+    pick1: '',
+    pick2: '',
+    pick3: ''
+  })
   
   const routes = {
     '/': () => <ChooseSeason seasons={seasons} setChosenSeason={setChosenSeason}/>,
-    '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks}/>
+    '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks} results={results} setResults={setResults}/>
   }
   
   const routeResult = useRoutes(routes);

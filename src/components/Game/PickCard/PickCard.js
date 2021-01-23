@@ -1,15 +1,39 @@
-
+import { useState } from 'react';
+import PickButton from './PickButton';
+import './PickCard.css';
 
 const PickCard = (props) => {
+
+    const [selected, setSelected] = useState();
+
+    const makeActive = (answer, ind) => {
+        setSelected(answer);
+        let clone = props.results;
+        clone[`pick${ind}`] = answer;
+        console.log(clone)
+        props.setResults({...props.results, ...clone});
+    }
+
+    const convertDate = (date) => {
+        let dateObj = new Date(date);
+        let month = dateObj.getMonth() + 1;
+        let day = dateObj.getDate();
+        let dateString = `${month}/${day}`       
+        return dateString
+    }
+
     return (
-        <div className = 'card'>
-            <h5 className='card-title'>
-                {props.pickQuestion}
-            </h5>
-            <div className = 'card-body'>
-                <div className='d-flex justify-content-around'>
-                    <div className='btn btn-outline-info w-50'>{props.choiceA}</div>
-                    <div className='btn btn-outline-info w-50'>{props.choiceB}</div>
+        <div className = 'card pick-card'>
+            <div className='card-title container-fluid'>
+                <div className='row'>
+                    <p className='col-10'>{props.pickQuestion}</p>
+                    <p className='col-2 pick-card-date bg-dark text-light'>{convertDate(props.date)}</p>
+                </div>
+            </div>
+            <div className = 'card-body container-fluid'>
+                <div className='row justify-content-around'>
+                    <PickButton makeActive={makeActive} selected={selected} choice={props.choiceA} ind={props.ind} />
+                    <PickButton makeActive={makeActive} selected={selected} choice={props.choiceB} ind={props.ind}/>
                 </div>
             </div>
         </div>
