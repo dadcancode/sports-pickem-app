@@ -8,9 +8,9 @@ const PickCard = (props) => {
 
     const makeActive = (answer, ind) => {
         setSelected(answer);
-        let clone = props.results;
+        let clone = props.picks;
         clone[`pick${ind}`] = answer;
-        props.setResults({...props.results, ...clone});
+        props.setPicks({...props.picks, ...clone});
     }
 
     const convertDate = (date) => {
