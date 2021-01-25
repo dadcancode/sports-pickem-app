@@ -1,6 +1,7 @@
 import { navigate } from "hookrouter";
 import { useEffect, useState } from "react";
 import LoadScreen from "../LoadScreen/LoadScreen";
+import { getPercent } from "../Record/RecordLogic";
 import { gradePicks, updateRecord } from './ResultsLogic';
 
 
@@ -9,10 +10,8 @@ const Results = (props) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log(props)
         if(props.randomEvents.length) {
             let grade = gradePicks(props.picks, props.randomEvents);
-            console.log(grade);
             updateRecord(grade, props.record, props.setRecord, props.chosenSeason);
             setLoading(!loading);
         }
@@ -23,7 +22,14 @@ const Results = (props) => {
     }
     return (
         <div className='container-fluid'>
-            <p>{`Your Overall Record: ${props.record.overall.correct}/${props.record.overall.total}`}</p>
+            <div className='row'>
+                <div className='col-6'>
+                    {`Your Overall Record: ${props.record.overall.correct}/${props.record.overall.total}`}
+                </div>
+                <div className='col-6'>
+                    {`${getPercent()}`}
+                </div>
+            </div>
             <p>{`Your record for the ${props.chosenSeason} season: ${props.record.years[props.chosenSeason].correct}/${props.record.years[props.chosenSeason].total}`}</p>
 
             <div className='row'>
