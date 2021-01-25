@@ -29,7 +29,7 @@ const Results = (props) => {
             <div className='row'>
                 <div className='btn btn-success' onClick={props.playAgain}>Keep Season and Play Again?</div>
                 <div className='btn btn-warning' onClick={props.resetSeason}>Change Season and Play Again?</div>
-                <div className='btn btn-info' onClick={() => navigate('/record')}>View Record</div>
+                <div className='btn btn-primary' onClick={() => navigate('/record')}>View Record</div>
                 <div className='btn btn-danger' onClick={props.resetGame}>Quit? (reset progress)</div>
             </div>
         </div>
