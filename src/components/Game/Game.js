@@ -10,17 +10,24 @@ import { navigate } from "hookrouter";
 
 const Game = (props) => {
 
+    
     const { loading, error, data } = useQuery(GET_SEASON, {
         variables: { year: props.chosenSeason }
     });
     const [allAnswered, setAllAnswered] = useState(false);
+    
 
     useEffect(() => {
-        if(data) props.setEvents(data.season.events)
+        if(data && props.newGame) {
+            console.log('you shouldnt see this on the second round')
+            props.setEvents(data.season.events);
+            props.setNewGame(!props.newGame);
+        }
     }, [data]);
 
     useEffect(() => {
         if(props.events) {
+            console.log('i ran')
             let picks = getUniqueRandoms(props.events, 4);
             props.setRandomPicks(picks);
         }
@@ -36,18 +43,8 @@ const Game = (props) => {
         setAllAnswered(true)
     }, [props.picks]);
 
-    const resetGame = (picks) => {
-        resetPicks(picks);
-        navigate('/');
-    }
+    
 
-    const resetPicks = (picks) => {
-        let clone = picks;
-        for(let x in clone) {
-            clone[x] = null;
-        }
-        props.setPicks([...props.picks, ...clone]);
-    }
 
 
     if(!props.randomPicks) return <LoadScreen />
@@ -58,9 +55,7 @@ const Game = (props) => {
                         {props.randomPicks.map((val, ind) => {
                             return <PickCard pickQuestion={val.strEvent} choiceA={val.strHomeTeam} choiceB={val.strAwayTeam} date={val.dateEvent} setPicks={props.setPicks} picks={props.picks} ind={ind}/>
                         })}
-                    <div className={`btn-dark text-light submit-button ${allAnswered ? 'fixed-bottom d-flex justify-content-center align-items-center' : 'd-none'}`} onClick={() => {
-                        navigate('/results')
-                    }}>SUBMIT</div>
+                    <div className={`btn-dark text-light submit-button ${allAnswered ? 'fixed-bottom d-flex justify-content-center align-items-center' : 'd-none'}`} onClick={() => navigate('/results')}>SUBMIT</div>
                 </div>
             </div>
         )

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useRoutes } from 'hookrouter';
+import { useRoutes, navigate } from 'hookrouter';
 import { GET_SEASONS } from './graphql';
 import { useQuery } from '@apollo/react-hooks'
+import { resetGame } from './components/Game/GameLogic'
 import LoadScreen from "./components/LoadScreen/LoadScreen";
 import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
 import Game from './components/Game/Game';
@@ -16,6 +17,7 @@ function App() {
   const [chosenSeason, setChosenSeason] = useState();
   const [events, setEvents] = useState();
   const [randomPicks, setRandomPicks] = useState();
+  const [newGame, setNewGame] = useState(true);
 
   const [picks, setPicks] = useState({
     0: null,
@@ -30,14 +32,16 @@ function App() {
       total: 0,
     },
     years: {}
-  })
+  });
   
   const routes = {
     '/': () => <ChooseSeason seasons={seasons} setChosenSeason={setChosenSeason}/>,
 
-    '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks} picks={picks} setPicks={setPicks}/>,
+    '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks} picks={picks} setPicks={setPicks} newGame={newGame} setNewGame={setNewGame}/>,
 
-    '/results' : () => <Results picks={picks} randomEvents={randomPicks} record={record} setRecord={setRecord} chosenSeason={chosenSeason}/>
+    '/results' : () => <Results picks={picks} randomEvents={randomPicks} record={record} setRecord={setRecord} chosenSeason={chosenSeason} resetGame={() => {
+      resetGame(picks, setPicks, setRandomPicks);
+    }} />
   }
   
   const routeResult = useRoutes(routes);
@@ -49,6 +53,12 @@ function App() {
           setSeasons(data.baseseasons);
       }
   }, [data]);
+
+  
+
+  
+
+  
 
   return (
     <div className="App bg-light">

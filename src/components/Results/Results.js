@@ -1,86 +1,39 @@
-import { useEffect } from "react";
-import _ from 'lodash'
+import { navigate } from "hookrouter";
+import { useEffect, useState } from "react";
+import LoadScreen from "../LoadScreen/LoadScreen";
+import { gradePicks, updateRecord } from './ResultsLogic';
+
 
 const Results = (props) => {
 
-    const gradePicks = (picks, randomEvents) => {
-        let grade = [];
-        console.log(randomEvents);
-        randomEvents.map((randomEvent, pickNumber) => {
-            grade.push(analyzeOne(randomEvent, picks[pickNumber]));
-        })
-
-        return grade
-    }
-
-    const analyzeOne = (randomEvent, pick) => {
-        let winner = getWinner(randomEvent);
-        if(pick === winner) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    const getWinner = (randomEvent) => {
-        
-        if(randomEvent['intHomeScore'] >= randomEvent['intAwayScore']) {
-            return randomEvent['strHomeTeam']
-        } else {
-            return randomEvent['strAwayTeam']
-        }
-
-    }
-
-    const updateRecord = (grade) => {
-
-        // let overallRecordClone = {...props.record.overall};
-        // let yearRecordClone = {};
-
-        let deepClone = _.cloneDeep(props.record);
-
-
-        
-        if(!deepClone.years[props.chosenSeason]) {
-            deepClone.years[props.chosenSeason] = {
-                correct: 0,
-                total: 0
-            }
-
-            // yearRecordClone = {...yearRecordClone[props.chosenSeason]};
-        }
-
-        grade.map((val) => {
-            deepClone.overall.total++
-            deepClone.years[props.chosenSeason].total++;
-            if(val) {
-                deepClone.overall.correct++;
-                deepClone.years[props.chosenSeason].correct++;
-            }
-        });
-
-
-        
-        console.log(deepClone);
-        props.setRecord(deepClone)
-
-    }
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         console.log(props)
         if(props.randomEvents.length) {
             let grade = gradePicks(props.picks, props.randomEvents);
             console.log(grade);
-            updateRecord(grade);
+            updateRecord(grade, props.record, props.setRecord, props.chosenSeason);
+            setLoading(!loading);
         }
     }, [props.randomEvents]);
 
-
+    if(loading) {
+        return <LoadScreen />
+    }
     return (
-        <div>
-            RESULTS
+        <div className='container-fluid'>
+            <p>{`Your Overall Record: ${props.record.overall.correct}/${props.record.overall.total}`}</p>
+            <p>{`Your record for the ${props.chosenSeason} season: ${props.record.years[props.chosenSeason].correct}/${props.record.years[props.chosenSeason].total}`}</p>
+
+            <div className='row'>
+                <div className='btn btn-success'>Keep Season and Play Again?</div>
+                <div className='btn btn-warning' onClick={props.resetGame}>Change Season and Play Again?</div>
+                <div className='btn btn-info'>View Record</div>
+                <div className='btn btn-danger'>Quit? (reset progress)</div>
+            </div>
         </div>
     )
 }
 
-export default Results;
+export default Results

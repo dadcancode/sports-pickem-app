@@ -1,4 +1,5 @@
 import { randomIndex } from "../services";
+import { navigate } from 'hookrouter';
 
 export const getUniqueRandoms = (arr, quantity) => {
     let clone = arr;
@@ -10,4 +11,22 @@ export const getUniqueRandoms = (arr, quantity) => {
     }
 
     return luckyWinners;
+}
+
+export const resetPicks = (picks, setPicks) => {
+    let clone = picks;
+    for(let x in clone) {
+        clone[x] = null;
+    }
+    setPicks({...clone});
+}
+
+export const resetRandomEvents = (setRandomPicks) => {
+    setRandomPicks();
+}
+
+export const resetGame = (picks, setPicks, setRandomPicks) => {
+    resetPicks(picks, setPicks);
+    resetRandomEvents(setRandomPicks);
+    navigate('/');
 }
