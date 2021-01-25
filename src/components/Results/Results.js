@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+import _ from 'lodash'
 
 const Results = (props) => {
 
@@ -25,21 +25,55 @@ const Results = (props) => {
     const getWinner = (randomEvent) => {
         
         if(randomEvent['intHomeScore'] >= randomEvent['intAwayScore']) {
-            return randomEvent['strHomeTeam'];
+            return randomEvent['strHomeTeam']
         } else {
-            return randomEvent['strAwayTeam'];
+            return randomEvent['strAwayTeam']
         }
+
+    }
+
+    const updateRecord = (grade) => {
+
+        // let overallRecordClone = {...props.record.overall};
+        // let yearRecordClone = {};
+
+        let deepClone = _.cloneDeep(props.record);
+
+
+        
+        if(!deepClone.years[props.chosenSeason]) {
+            deepClone.years[props.chosenSeason] = {
+                correct: 0,
+                total: 0
+            }
+
+            // yearRecordClone = {...yearRecordClone[props.chosenSeason]};
+        }
+
+        grade.map((val) => {
+            deepClone.overall.total++
+            deepClone.years[props.chosenSeason].total++;
+            if(val) {
+                deepClone.overall.correct++;
+                deepClone.years[props.chosenSeason].correct++;
+            }
+        });
+
+
+        
+        console.log(deepClone);
+        props.setRecord(deepClone)
 
     }
 
     useEffect(() => {
         console.log(props)
         if(props.randomEvents.length) {
-            console.log(props.randomEvents)
             let grade = gradePicks(props.picks, props.randomEvents);
-            console.log(grade)
+            console.log(grade);
+            updateRecord(grade);
         }
-    }, [props])
+    }, [props.randomEvents]);
 
 
     return (

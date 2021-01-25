@@ -22,6 +22,14 @@ function App() {
     1: null,
     2: null,
     3: null
+  });
+
+  const [record, setRecord] = useState({
+    overall: {
+      correct: 0,
+      total: 0,
+    },
+    years: {}
   })
   
   const routes = {
@@ -29,7 +37,7 @@ function App() {
 
     '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks} picks={picks} setPicks={setPicks}/>,
 
-    '/results' : () => <Results picks={picks} randomEvents={randomPicks}/>
+    '/results' : () => <Results picks={picks} randomEvents={randomPicks} record={record} setRecord={setRecord} chosenSeason={chosenSeason}/>
   }
   
   const routeResult = useRoutes(routes);
