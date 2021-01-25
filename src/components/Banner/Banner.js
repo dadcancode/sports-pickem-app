@@ -3,7 +3,7 @@ import { A } from 'hookrouter';
 
 const Banner = (props) => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
             <div className="container-fluid">
                 <A className="navbar-brand plain-text" href="/">{props.year || null}</A>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,6 +13,9 @@ const Banner = (props) => {
                     <ul className="navbar-nav">
                         <li className='nav-item'>
                             <A className="nav-link" href="/" data-toggle="collapse" data-target=".navbar-collapse.show" >Choose Season</A>
+                        </li>
+                        <li className='nav-item'>
+                            <A className="nav-link" href="/record" data-toggle="collapse" data-target=".navbar-collapse.show" >Record</A>
                         </li>
                     </ul>
                 </div>
