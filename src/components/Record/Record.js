@@ -11,10 +11,10 @@ const Record = ({ record: {overall, years} }) => {
         <div className='container-fluid'>
             <div className='row pt-4'>
                 <div className='col-12'>
-                    <p>Your Overall Record:</p>
-                    <p>Correct Picks: {overall.correct}</p>
-                    <p>Total Picks: {overall.total}</p>
-                    <p>{`${getPercent(overall.correct, overall.total)}`}%</p>
+                    <p className='plain-text text-light'>Your Overall Record:</p>
+                    <p className='plain-text text-light'>Correct Picks: {overall.correct}</p>
+                    <p className='plain-text text-light'>Total Picks: {overall.total}</p>
+                    <p className='plain-text text-light'>{`${getPercent(overall.correct, overall.total)}`}%</p>
                 </div>
                 <div className='col-12'>
                     {
