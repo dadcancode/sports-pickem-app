@@ -1,5 +1,6 @@
 import { randomIndex } from "../services";
 import { navigate } from 'hookrouter';
+import _ from 'lodash';
 
 export const getUniqueRandoms = (arr, quantity) => {
     let clone = arr;
@@ -25,6 +26,16 @@ export const resetRandomEvents = (setRandomPicks) => {
     setRandomPicks();
 }
 
+export const resetRecord = (record, setRecord) => {
+    let deepCopy = _.cloneDeep(record);
+    deepCopy.overall = {
+        correct: 0,
+        total: 0
+    };
+    deepCopy.years = {};
+    setRecord(deepCopy);
+}
+
 export const resetSeason = (picks, setPicks, setRandomPicks) => {
     resetPicks(picks, setPicks);
     resetRandomEvents(setRandomPicks);
@@ -34,4 +45,11 @@ export const resetSeason = (picks, setPicks, setRandomPicks) => {
 export const playAgain = (picks, setPicks) => {
     resetPicks(picks, setPicks);
     navigate('/playGame');
+}
+
+export const resetGame = (picks, setPicks, record, setRecord, setChosenSeason) => {
+    resetPicks(picks, setPicks);
+    resetRecord(record, setRecord);
+    setChosenSeason();
+    navigate('/')
 }

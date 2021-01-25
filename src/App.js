@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useRoutes, navigate } from 'hookrouter';
 import { GET_SEASONS } from './graphql';
 import { useQuery } from '@apollo/react-hooks'
-import { playAgain, resetSeason } from './components/Game/GameLogic'
+import { playAgain, resetGame, resetSeason } from './components/Game/GameLogic'
 import LoadScreen from "./components/LoadScreen/LoadScreen";
 import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
 import Game from './components/Game/Game';
 import Results from './components/Results/Results';
 import Banner from './components/Banner/Banner';
 import './App.css';
+import Record from "./components/Record/Record";
 
 function App() {
 
@@ -41,12 +42,16 @@ function App() {
 
     '/results' : () => <Results picks={picks} randomEvents={randomPicks} record={record} setRecord={setRecord} chosenSeason={chosenSeason} 
       resetSeason={() => {
-      resetSeason(picks, setPicks, setRandomPicks);
+        resetSeason(picks, setPicks, setRandomPicks);
       }}
       playAgain={() => {
         playAgain(picks, setPicks);
       }}
-    />
+      resetGame={() => {
+        resetGame(picks, setPicks, record, setRecord, setChosenSeason);
+      }}
+    />,
+    '/record' : () => <Record record={record}/>
   }
   
   const routeResult = useRoutes(routes);
