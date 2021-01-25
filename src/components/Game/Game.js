@@ -6,7 +6,7 @@ import { getUniqueRandoms } from "./GameLogic";
 import PickCard from './PickCard/PickCard';
 import './Game.css';
 import { navigate } from "hookrouter";
-import Banner from "./Banner/Banner";
+
 
 const Game = (props) => {
 
@@ -38,7 +38,7 @@ const Game = (props) => {
 
     const resetGame = (picks) => {
         resetPicks(picks);
-        navigate('/')
+        navigate('/');
     }
 
     const resetPicks = (picks) => {
@@ -49,20 +49,20 @@ const Game = (props) => {
         props.setPicks([...props.picks, ...clone]);
     }
 
+
     if(!props.randomPicks) return <LoadScreen />
     else {
         return (
-            <>
-                <Banner year={props.chosenSeason} />
-                <div className='container-fluid'>
-                    <div className='row justify-content-center align-items-center'>
-                            {props.randomPicks.map((val, ind) => {
-                                return <PickCard pickQuestion={val.strEvent} choiceA={val.strHomeTeam} choiceB={val.strAwayTeam} date={val.dateEvent} setPicks={props.setPicks} picks={props.picks} ind={ind}/>
-                            })}
-                        <div type='button' className={`btn-dark text-light submit-button ${allAnswered ? null : 'd-none'}`} onClick={() => {navigate('/gameResults')}}>SUBMIT</div>
-                    </div>
+            <div className='container-fluid'>
+                <div className='row pt-4'>
+                        {props.randomPicks.map((val, ind) => {
+                            return <PickCard pickQuestion={val.strEvent} choiceA={val.strHomeTeam} choiceB={val.strAwayTeam} date={val.dateEvent} setPicks={props.setPicks} picks={props.picks} ind={ind}/>
+                        })}
+                    <div className={`btn-dark text-light submit-button ${allAnswered ? 'fixed-bottom d-flex justify-content-center align-items-center' : 'd-none'}`} onClick={() => {
+                        navigate('/results')
+                    }}>SUBMIT</div>
                 </div>
-            </>
+            </div>
         )
     }
 }

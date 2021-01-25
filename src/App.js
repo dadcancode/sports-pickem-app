@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import LoadScreen from "./components/LoadScreen/LoadScreen";
-import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
 import { useRoutes } from 'hookrouter';
 import { GET_SEASONS } from './graphql';
 import { useQuery } from '@apollo/react-hooks'
+import LoadScreen from "./components/LoadScreen/LoadScreen";
+import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
 import Game from './components/Game/Game';
+import Results from './components/Results/Results';
+import Banner from './components/Banner/Banner';
 import './App.css';
-import Results from "./components/Game/Results/Results";
 
 function App() {
 
@@ -17,10 +18,10 @@ function App() {
   const [randomPicks, setRandomPicks] = useState();
 
   const [picks, setPicks] = useState({
-    pick0: null,
-    pick1: null,
-    pick2: null,
-    pick3: null
+    0: null,
+    1: null,
+    2: null,
+    3: null
   })
   
   const routes = {
@@ -28,7 +29,7 @@ function App() {
 
     '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks} picks={picks} setPicks={setPicks}/>,
 
-    '/gameResults' : () => <Results />
+    '/results' : () => <Results picks={picks} randomEvents={randomPicks}/>
   }
   
   const routeResult = useRoutes(routes);
@@ -42,11 +43,13 @@ function App() {
   }, [data]);
 
   return (
-    <div className="App">
+    <div className="App bg-light">
+      <Banner year={chosenSeason} />
       {
         loading ? 
           <LoadScreen /> : routeResult
       }
+
       
     </div>
   );
