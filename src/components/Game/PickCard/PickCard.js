@@ -25,8 +25,8 @@ const PickCard = (props) => {
         <div className = 'card pick-card pt-1 col-12 mb-2 h-100'>
             <div className='card-title container-fluid'>
                 <div className='row'>
-                    <p className='col-10'>{props.pickQuestion}</p>
                     <p className='col-2 pick-card-date bg-dark text-light d-flex justify-content-center align-items-center'>{convertDate(props.date)}</p>
+                    <p className='col-10'>{props.pickQuestion}</p>
                 </div>
             </div>
             <div className = 'card-body container-fluid'>

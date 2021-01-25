@@ -15,11 +15,14 @@ const Game = (props) => {
         variables: { year: props.chosenSeason }
     });
     const [allAnswered, setAllAnswered] = useState(false);
+
+    useEffect(() => {
+        console.log(allAnswered);
+    }, [allAnswered]);
     
 
     useEffect(() => {
         if(data && props.newGame) {
-            console.log('you shouldnt see this on the second round')
             props.setEvents(data.season.events);
             props.setNewGame(!props.newGame);
         }
@@ -27,21 +30,32 @@ const Game = (props) => {
 
     useEffect(() => {
         if(props.events) {
-            console.log('i ran')
             let picks = getUniqueRandoms(props.events, 4);
             props.setRandomPicks(picks);
         }
     }, [props.events]);
 
     useEffect(() => {
-        for(let x in props.picks) {
-            if(!props.picks[x]) {
-                return null;
+
+        if(props.events) {
+            if(props.events.length >= 4) {
+                for(let x in props.picks) {
+                    if(!props.picks[x]) {
+                        return;
+                    }
+                }
+                setAllAnswered(true);
+            } else {
+                props.events.map((val, ind) => {
+                    if(!props.picks[ind]) {
+                        return;
+                    }
+                })
+                setAllAnswered(true);
             }
         }
 
-        setAllAnswered(true)
-    }, [props.picks]);
+    }, [props.picks, props.events]);
 
     
 
