@@ -71,7 +71,7 @@ function App() {
   
 
   return (
-    <div className="App bg-light">
+    <div className="App">
       <Banner year={chosenSeason} />
       {
         loading ? 

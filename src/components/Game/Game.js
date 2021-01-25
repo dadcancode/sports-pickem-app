@@ -65,7 +65,7 @@ const Game = (props) => {
     else {
         return (
             <div className='container-fluid'>
-                <div className='row pt-4'>
+                <div className='row justify-content-around align-items-center pt-4 pick-card-row'>
                         {props.randomPicks.map((val, ind) => {
                             return <PickCard pickQuestion={val.strEvent} choiceA={val.strHomeTeam} choiceB={val.strAwayTeam} date={val.dateEvent} setPicks={props.setPicks} picks={props.picks} ind={ind}/>
                         })}

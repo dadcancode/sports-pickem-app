@@ -2,3 +2,7 @@
     height: 75px;
     font-size: 30pt;
 }
+
+.pick-card-row {
+    min-height: 60vh;
+}

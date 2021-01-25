@@ -1,4 +1,8 @@
 .season-list {
-    height: 500px!important;
+    height: 60vh!important;
     overflow: scroll;
+}
+
+.header-col {
+    height: 20vh;
 }

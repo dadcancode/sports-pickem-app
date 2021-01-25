@@ -1,6 +1,4 @@
-.pick-card {
-    /* height: 150px; */
-}
+
 
 .pick-btn {
     /* height: 60px; */
@@ -10,3 +8,19 @@
 .pick-card-date {
     font-size: 10pt!important;
 }
+
+.pc-title-text {
+    font-size: .9vh!important;
+}
+
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+        .pick-card {
+            min-height: 200px;
+        }
+
+        .pick-header-row {
+            min-height: 105px;
+        }
+    }
+    

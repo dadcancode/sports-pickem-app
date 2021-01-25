@@ -6,5 +6,25 @@
 .App {
   /* text-align: center; */
   height: 100vh;
+  background-image: linear-gradient(to right bottom, #256d05, #237803, #208402, #1a8f01, #0d9b00);
+}
+
+.plain-text {
+  font-family: 'Raleway', sans-serif;
+  font-size: 25pt!important;
+}
+
+.plain-text-resp {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2vh!important;
+}
+
+.imp-text {
+  font-family: 'Imbue', serif;
+  
+}
+
+.imp-big-resp {
+  font-size: 10vw!important;
 }
 
