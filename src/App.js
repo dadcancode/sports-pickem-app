@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRoutes, navigate } from 'hookrouter';
 import { GET_SEASONS } from './graphql';
 import { useQuery } from '@apollo/react-hooks'
-import { resetGame } from './components/Game/GameLogic'
+import { playAgain, resetSeason } from './components/Game/GameLogic'
 import LoadScreen from "./components/LoadScreen/LoadScreen";
 import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
 import Game from './components/Game/Game';
@@ -39,9 +39,14 @@ function App() {
 
     '/playGame' : () => <Game chosenSeason={chosenSeason} setEvents={setEvents} events={events} setRandomPicks={setRandomPicks} randomPicks={randomPicks} picks={picks} setPicks={setPicks} newGame={newGame} setNewGame={setNewGame}/>,
 
-    '/results' : () => <Results picks={picks} randomEvents={randomPicks} record={record} setRecord={setRecord} chosenSeason={chosenSeason} resetGame={() => {
-      resetGame(picks, setPicks, setRandomPicks);
-    }} />
+    '/results' : () => <Results picks={picks} randomEvents={randomPicks} record={record} setRecord={setRecord} chosenSeason={chosenSeason} 
+      resetSeason={() => {
+      resetSeason(picks, setPicks, setRandomPicks);
+      }}
+      playAgain={() => {
+        playAgain(picks, setPicks);
+      }}
+    />
   }
   
   const routeResult = useRoutes(routes);

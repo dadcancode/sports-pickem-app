@@ -4,7 +4,7 @@ const SeasonTab = (props) => {
 
     const setSeason = (year) => {
         props.setChosenSeason(year);
-        navigate('/playGame')
+        navigate('/playGame');
     }
     
     return (

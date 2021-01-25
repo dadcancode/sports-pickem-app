@@ -55,7 +55,7 @@ const Game = (props) => {
                         {props.randomPicks.map((val, ind) => {
                             return <PickCard pickQuestion={val.strEvent} choiceA={val.strHomeTeam} choiceB={val.strAwayTeam} date={val.dateEvent} setPicks={props.setPicks} picks={props.picks} ind={ind}/>
                         })}
-                    <div className={`btn-dark text-light submit-button ${allAnswered ? 'fixed-bottom d-flex justify-content-center align-items-center' : 'd-none'}`} onClick={() => navigate('/results')}>SUBMIT</div>
+                    <button type='button' className={`btn-dark text-light submit-button ${allAnswered ? 'fixed-bottom d-flex justify-content-center align-items-center' : 'd-none'}`} onClick={() => navigate('/results')}>SUBMIT</button>
                 </div>
             </div>
         )
