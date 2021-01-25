@@ -1,0 +1,1 @@
+export const API_URL = 'https://pick-api.herokuapp.com/graphql'
