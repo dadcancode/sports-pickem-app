@@ -1,1 +1,1 @@
-export const API_URL = 'https://sports-pickem-api.herokuapp.com/graphql'
+export const API_URL = 'https://pick-api.herokuapp.com/graphql'
