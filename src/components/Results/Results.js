@@ -23,16 +23,29 @@ const Results = (props) => {
     return (
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-6'>
-                    {`Your Overall Record: ${props.record.overall.correct}/${props.record.overall.total}`}
+                <div className='col-10 plain-text text-light'>
+                    {`Your Overall Record:`}
                 </div>
-                <div className='col-6'>
-                    {`${getPercent()}`}
+                <div className='col-10 plain-text text-light'>
+                    {`${props.record.overall.correct}/${props.record.overall.total}`}
+                </div>
+                
+                <div className='col-10 plain-text mb-4 text-light'>
+                    {`${getPercent(props.record.overall.correct, props.record.overall.total)}%`}
+                </div>
+
+                <div className='col-10 plain-text text-light'>
+                    {`${props.chosenSeason} season: `}
+                </div>
+                <div className='col-10 plain-text text-light'>
+                    {`${props.record.years[props.chosenSeason].correct}/${props.record.years[props.chosenSeason].total}`}
+                </div>
+                <div className='col-10 plain-text text-light'>
+                    {`${getPercent(props.record.years[props.chosenSeason].correct, props.record.years[props.chosenSeason].total)}%`}
                 </div>
             </div>
-            <p>{`Your record for the ${props.chosenSeason} season: ${props.record.years[props.chosenSeason].correct}/${props.record.years[props.chosenSeason].total}`}</p>
 
-            <div className='row'>
+            <div className='row fixed-bottom'>
                 <div className='btn btn-success' onClick={props.playAgain}>Keep Season and Play Again?</div>
                 <div className='btn btn-warning' onClick={props.resetSeason}>Change Season and Play Again?</div>
                 <div className='btn btn-primary' onClick={() => navigate('/record')}>View Record</div>
