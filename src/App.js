@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRoutes, navigate } from 'hookrouter';
 import { GET_SEASONS } from './graphql';
 import { useQuery } from '@apollo/react-hooks'
-import { playAgain, resetGame, resetSeason } from './components/Game/GameLogic'
+import { playAgain, resetGame, resetPicks, resetSeason } from './components/Game/GameLogic'
 import LoadScreen from "./components/LoadScreen/LoadScreen";
 import ChooseSeason from "./components/ChooseSeason/ChooseSeason";
 import Game from './components/Game/Game';
@@ -72,7 +72,10 @@ function App() {
 
   return (
     <div className="App">
-      <Banner year={chosenSeason} />
+      <Banner year={chosenSeason} resetPicks={() => {
+          resetPicks(picks, setPicks);
+          navigate('/');
+        }} />
       {
         loading ? 
           <LoadScreen /> : routeResult
