@@ -1,3 +1,41 @@
+# Sports Pickem App
+This app is a historical sports picking app for the NFL.  Choose your favorite historic season and make your picks of who won the historic matchup.  Play different seasons and keep track of which one your are the best at!
+
+## Installation
+
+Use node to install the Sports Pickem App
+
+```bash
+npm-install
+```
+
+## Technology Used
+
+### Frontend
+
+- HTML/CSS
+- Bootstrap
+- JavaScript
+- React
+- GraphQL
+- Hookrouter
+
+### Backend
+
+- Ruby on Rails
+- GraphQL
+
+## Features to Add
+
+- Host DB so users can create profiles and compete with friends
+- User Auth
+- Leaderboard section
+- Able to pick different leagues or sports
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
