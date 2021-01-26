@@ -65,10 +65,14 @@ const Game = (props) => {
     else {
         return (
             <div className='container-fluid'>
-                <div className='row justify-content-around align-items-center pt-4 pick-card-row'>
-                        {props.randomPicks.map((val, ind) => {
-                            return <PickCard pickQuestion={val.strEvent} choiceA={val.strHomeTeam} choiceB={val.strAwayTeam} date={val.dateEvent} setPicks={props.setPicks} picks={props.picks} ind={ind}/>
-                        })}
+                <div className='row justify-content-around justify-content-center align-items-center pt-4 pick-card-row'>
+                    <div className='col-md-8'>
+                        <div className='row'>
+                            {props.randomPicks.map((val, ind) => {
+                                return <PickCard pickQuestion={val.strEvent} choiceA={val.strHomeTeam} choiceB={val.strAwayTeam} date={val.dateEvent} setPicks={props.setPicks} picks={props.picks} ind={ind}/>
+                            })}
+                        </div>
+                    </div>
                     <button type='button' className={`btn-dark text-light submit-button ${allAnswered ? 'fixed-bottom d-flex justify-content-center align-items-center' : 'd-none'}`} onClick={() => navigate('/results')}>SUBMIT</button>
                 </div>
             </div>
