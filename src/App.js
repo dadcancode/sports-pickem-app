@@ -48,7 +48,7 @@ function App() {
         playAgain(picks, setPicks);
       }}
       resetGame={() => {
-        resetGame(picks, setPicks, record, setRecord, setChosenSeason);
+        resetGame(picks, setPicks, record, setRecord, setChosenSeason, setRandomPicks);
       }}
     />,
     '/record' : () => <Record record={record}/>

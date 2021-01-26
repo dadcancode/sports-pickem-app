@@ -53,7 +53,8 @@ export const playAgain = (picks, setPicks) => {
     navigate('/playGame');
 }
 
-export const resetGame = (picks, setPicks, record, setRecord, setChosenSeason) => {
+export const resetGame = (picks, setPicks, record, setRecord, setChosenSeason, setRandomPicks) => {
+    resetRandomEvents(setRandomPicks);
     resetPicks(picks, setPicks);
     resetRecord(record, setRecord);
     setChosenSeason();
