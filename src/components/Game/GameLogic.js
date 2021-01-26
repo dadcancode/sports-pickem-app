@@ -5,18 +5,21 @@ import _ from 'lodash';
 export const getUniqueRandoms = (arr, quantity) => {
     let clone = arr;
     let luckyWinners = [];
+    let limit;
 
-    if(clone.length >= quantity) {
-        for(let i = 0; i < quantity; i++) {
-            let rando = clone.splice(randomIndex(clone), 1);
-            luckyWinners.push(rando[0]);
-        }
-    } else {
-        for(let i = 0; i < clone.length; i++) {
-            let rando = clone.splice(randomIndex(clone), 1);
-            luckyWinners.push(rando[0]);
-        }
+    clone.length >= quantity ? limit = quantity : limit = clone.length;
+
+    for(let i = 0; i < limit; i++) {
+        let rando = clone.splice(randomIndex(clone), 1);
+        luckyWinners.push(rando[0]);
     }
+    // if(clone.length >= quantity) {
+    // } else {
+    //     for(let i = 0; i < clone.length; i++) {
+    //         let rando = clone.splice(randomIndex(clone), 1);
+    //         luckyWinners.push(rando[0]);
+    //     }
+    // }
     return luckyWinners;
 }
 

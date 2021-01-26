@@ -38,21 +38,22 @@ const Game = (props) => {
     useEffect(() => {
 
         if(props.events) {
-            if(props.events.length >= 4) {
-                for(let x in props.picks) {
-                    if(!props.picks[x]) {
-                        return;
-                    }
+            for(let x in props.picks) {
+                if(!props.picks[x]) {
+                    return;
                 }
-                setAllAnswered(true);
-            } else {
-                props.events.map((val, ind) => {
-                    if(!props.picks[ind]) {
-                        return;
-                    }
-                })
-                setAllAnswered(true);
             }
+            setAllAnswered(true);
+            // if(props.events.length >= 4) {
+            // } else {
+                
+            //     props.events.map((val, ind) => {
+            //         if(!props.picks[ind]) {
+            //             return;
+            //         }
+            //     })
+            //     setAllAnswered(true);
+            // }
         }
 
     }, [props.picks, props.events]);

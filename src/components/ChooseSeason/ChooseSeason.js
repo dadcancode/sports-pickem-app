@@ -19,9 +19,12 @@ const ChooseSeason = (props) => {
                         {
                             props.seasons ?
                                 props.seasons.map((val) => {
-                                    return (
-                                        <SeasonTab seasonYear={val.strSeason} setChosenSeason={props.setChosenSeason}/>
-                                    )
+                                    if(val.strSeason === '1997') {
+                                    } else {
+                                        return (
+                                            <SeasonTab seasonYear={val.strSeason} setChosenSeason={props.setChosenSeason}/>
+                                        )
+                                    }
                                 }) :
                                 null
                         }
